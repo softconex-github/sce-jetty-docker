@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  jetty:
+    container_name: sce-jetty-docker
+    image: jetty
+    ports:
+      - "8080:8080"
+      - "8443:8443" 
+    volumes:
+     - ./timezone:/etc/timezone
+     - ./jetty.xml:/usr/local/jetty/etc/jetty.xml
+     - ./webdefault.xml:/usr/local/jetty/etc/webdefault.xml
+     - ./static/webapps:/var/lib/jetty/webapps
+     - ./static/static-content:/var/lib/jetty/static-content
+    environment:
+      JAVA_OPTIONS: "-Xmx12000m -Xms256m"
+    restart:
+      always
